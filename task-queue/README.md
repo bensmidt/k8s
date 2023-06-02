@@ -1,3 +1,3 @@
-# flask-celery-microservice
-
-Contains code samples for [Scaling Celery workers with RabbitMQ on Kubernetes](https://learnk8s.io/scaling-celery-rabbitmq-kubernetes)
+## References
+- [Scaling Celery workers with RabbitMQ on Kubernetes Blog Tutorial](https://learnk8s.io/scaling-celery-rabbitmq-kubernetes)
+- [Scaling Celery workers with RabbitMQ on Kubernetes GitHub repo](https://learnk8s.io/scaling-celery-rabbitmq-kubernetes)
