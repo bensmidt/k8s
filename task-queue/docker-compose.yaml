@@ -6,4 +6,4 @@ services:
       - "8089:8089"
     volumes: 
       - ${PWD}:/mnt/locust
-    command: -f /mnt/locust/complete_flow_load_test.py
+    command: -f /mnt/locust/generate_flow_load_test.py
