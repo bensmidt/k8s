@@ -1,3 +1,7 @@
-gevent 
-grequests
+celery 
+Flask
+gevent
+gunicorn
 locust
+requests
+SQLAlchemy
