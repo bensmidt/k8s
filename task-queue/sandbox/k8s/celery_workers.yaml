@@ -23,17 +23,17 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: celery-worker
+  name: celery-workers-deployment
   namespace: celery-workers
 spec:
   replicas: 2
   selector:
     matchLabels:
-      name: celery-worker
+      component: worker
   template:
     metadata:
       labels:
-        name: celery-worker
+        component: worker
     spec:
       containers:
         - name: celery-worker
