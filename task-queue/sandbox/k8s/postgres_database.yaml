@@ -23,8 +23,6 @@ kind: Deployment
 metadata:
   name: postgres-deployment
   namespace: postgres-database
-  # labels:
-  #   name: postgres-database-deployment
 spec:
   replicas: 1
   selector:
@@ -43,7 +41,6 @@ spec:
                 name: postgres-secret
           ports:
             - containerPort: 5432
-              # name: postgresql-container-port
 ---
 # service
 apiVersion: v1
@@ -51,8 +48,6 @@ kind: Service
 metadata:
   name: postgres-service
   namespace: postgres-database
-  # labels:
-  #   name: postgresql
 spec:
   ports:
     - port: 5432
