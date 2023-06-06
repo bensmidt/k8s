@@ -3,26 +3,24 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: postgres-database
+  name: redis-database
 ---
 # secret
 apiVersion: v1
 kind: Secret
 metadata:
-  name: postgres-secret
-  namespace: postgres-database
+  name: redis-secret
+  namespace: redis-database
 type: Opaque
 data:
-  POSTGRES_USER: dGVzdA== # "test"
-  POSTGRES_DB: Zmxhc2stc2VydmljZQ== # "flask-service"
-  POSTGRES_PASSWORD: dGVzdEAxMjM= # test@123
+  REDIS_PASSWORD: dGVzdEAxMjM= # test@123
 ---
 # deploy
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
-  namespace: postgres-database
+  name: redis-deployment
+  namespace: redis-database
 spec:
   replicas: 1
   selector:
@@ -34,23 +32,24 @@ spec:
         component: database
     spec:
       containers:
-        - image: postgres:9.6.2-alpine
-          name: postgresql
+        - image: redis:latest
+          name: redis
           envFrom:
             - secretRef:
-                name: postgres-secret
+                name: redis-secret
+          args: ["--requirepass", "$(REDIS_PASSWORD)"]
           ports:
-            - containerPort: 5432
+            - containerPort: 6379
 ---
 # service
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service
-  namespace: postgres-database
+  name: redis-service
+  namespace: redis-database
 spec:
   ports:
-    - port: 5432
+    - port: 6379
   selector:
     component: database
 ---

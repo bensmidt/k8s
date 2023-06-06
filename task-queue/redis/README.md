@@ -1,0 +1,3 @@
+## Usage
+- To use this repo, follow this tutorial from 2021: [Scaling Celery workers with RabbitMQ on Kubernetes Blog Tutorial](https://learnk8s.io/scaling-celery-rabbitmq-kubernetes)
+- Here are my [corrections and updates](https://clipsai.notion.site/Scaling-Celery-workers-with-RabbitMQ-on-Kubernetes-4d52aa54c1f64babb60f91fa86ff2b1f?pvs=4) as well as [my GitHub repo](https://learnk8s.io/scaling-celery-rabbitmq-kubernetes) (2023)

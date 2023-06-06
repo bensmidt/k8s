@@ -13,6 +13,7 @@ MarkupSafe
 prompt-toolkit
 psycopg2-binary
 pytz
+redis
 six
 SQLAlchemy==1.3.20
 vine

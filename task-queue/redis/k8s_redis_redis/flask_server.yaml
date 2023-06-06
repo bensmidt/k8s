@@ -12,14 +12,13 @@ metadata:
   namespace: flask-backend
 type: Opaque
 data:
-  CELERY_BROKER_URL: YW1xcDovL2FkbWluOnNlY3JldHBhc3N3b3JkQHJhYmJpdG1xLXNlcnZpY2UucmFiYml0bXEtYnJva2VyOjU2NzI=
-  # amqp://admin:secretpassword@rabbitmq-service.rabbitmq-broker:5672
-  # amqp://<rabbitmq-user>:<rabbitmq-password>@<service>.<namespace:5672
-  CELERY_RESULT_BACKEND: ZGIrcG9zdGdyZXNxbDovL3Rlc3Q6dGVzdEAxMjNAcG9zdGdyZXMtc2VydmljZS5wb3N0Z3Jlcy1kYXRhYmFzZTo1NDMyL2ZsYXNrLXNlcnZpY2U=
-  # db+postgresql://test:test@123@postgres-service.postgres-database:5432/flask-service
-  # db+postgresql://<postgres-user>:<postgres-password>@<service>.<namespace>:<container-port>/<pg-database>
-  SECRET_KEY: dGVzdA==
-  # test
+  CELERY_MESSAGE_BROKER_URL: cmVkaXM6Ly86dGVzdEAxMjNAcmVkaXMtc2VydmljZS5yZWRpcy1icm9rZXI6NjM3OS8w
+  # redis://:test@123@redis-service.redis-broker:6379/0
+  # redis://:<redis-broker-password>@<service>.<namespace>:<container-port>/0
+  CELERY_DATABASE_URL: cmVkaXM6Ly86dGVzdEAxMjNAcmVkaXMtc2VydmljZS5yZWRpcy1kYXRhYmFzZTo2Mzc5LzA=
+  # redis://:test@123@redis-service.redis-database:6379/0
+  # redis://:<redis-database-password>@<service>.<namespace>:<container-port>/0 
+  SECRET_KEY: dGVzdA== # test
 ---
 # deployment
 apiVersion: apps/v1
@@ -56,5 +55,5 @@ spec:
   selector:
     component: backend
   ports:
-    - port: 80
+    - port: 3000
       targetPort: 5000
