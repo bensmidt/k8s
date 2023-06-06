@@ -12,11 +12,12 @@ metadata:
   namespace: flask-backend
 type: Opaque
 data:
-  CELERY_BROKER_URL: YW1xcDovL2FkbWluOnNlY3JldHBhc3N3b3JkQHJhYmJpdG1xLnJhYmJpdG1xOjU2NzI=
-  # amqp://admin:secretpassword@rabbitmq.rabbitmq:5672
+  CELERY_BROKER_URL: YW1xcDovL2FkbWluOnNlY3JldHBhc3N3b3JkQHJhYmJpdG1xLXNlcnZpY2UucmFiYml0bXEtYnJva2VyOjU2NzI=
+  # amqp://admin:secretpassword@rabbitmq-service.rabbitmq-broker:5672
+  # amqp://<rabbitmq-user>:<rabbitmq-password>@<service>.<namespace:5672
   CELERY_RESULT_BACKEND: ZGIrcG9zdGdyZXNxbDovL3Rlc3Q6dGVzdEAxMjNAcG9zdGdyZXMtc2VydmljZS5wb3N0Z3Jlcy1kYXRhYmFzZTo1NDMyL2ZsYXNrLXNlcnZpY2U=
   # db+postgresql://test:test@123@postgres-service.postgres-database:5432/flask-service
-  # db+postgresql://<pg-user>:<pg-password>@<service>.<namespace>:<container-port>/<pg-database>
+  # db+postgresql://<postgres-user>:<postgres-password>@<service>.<namespace>:<container-port>/<pg-database>
   SECRET_KEY: dGVzdA==
   # test
 ---
@@ -24,17 +25,17 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-server
+  name: flask-server-deployment
   namespace: flask-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: flask-server
+      component: backend
   template:
     metadata:
       labels:
-        name: flask-server
+        component: backend
     spec:
       containers:
         - name: flask-server
@@ -44,17 +45,16 @@ spec:
                 name: flask-secret
           ports:
             - containerPort: 5000
-              name: rest
 ---
 # service
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-server
+  name: flask-server-service
   namespace: flask-backend
 spec:
   selector:
-    name: flask-server
+    component: backend
   ports:
     - port: 80
-      targetPort: rest
+      targetPort: 5000
